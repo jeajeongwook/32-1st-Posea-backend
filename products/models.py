@@ -11,7 +11,7 @@ class MainCategory(models.Model) :
 
 class Category(models.Model) :
     name         = models.CharField(max_length=100)
-    maincategory = models.ForeignKey('Main', on_delete=models.CASCADE)
+    maincategory = models.ForeignKey('MainCategory', on_delete=models.CASCADE)
 
     class Meta :
         db_table = 'categories'
@@ -25,8 +25,8 @@ class Product(TimeStamp) :
     direction = models.CharField(max_length=100)
     detail    = models.CharField(max_length=1000)
     is_new    = models.BooleanField(default=False)
-    skins     = models.ManyToManyField('Skin', through="Product_Skin")
-    scents    = models.ManyToManyField('Scent', through="Product_Scent")
+    skins     = models.ManyToManyField('Skin', through="ProductSkin")
+    scents    = models.ManyToManyField('Scent', through="ProductScent")
 
     class Meta :
         db_table = 'products'
@@ -34,10 +34,10 @@ class Product(TimeStamp) :
 
 class ProductSkin(models.Model) : 
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
-    skin    = models.ForeignKey('Skin', on_delete=models.CASCADE)
+    skin    = models.ForeignKey('Skin', on_delete=models.CASCADE, null=True)
 
     class Meta :
-        db_table = 'productskins'
+        db_table = 'product_skins'
 
 
 class Skin(models.Model) :
@@ -52,7 +52,7 @@ class ProductScent(models.Model) :
     Scent   = models.ForeignKey('Scent', on_delete=models.CASCADE)
 
     class Meta :
-        db_table = 'productscents'
+        db_table = 'product_scents'
 
 
 class Scent(models.Model) :
@@ -62,18 +62,18 @@ class Scent(models.Model) :
         db_table = 'scents'
 
 
-class Image(models.Model) :
+class ProductImage(models.Model) :
     product   = models.ForeignKey('Product', on_delete=models.CASCADE)
     image_url = models.CharField(max_length=500)
 
     class Meta :
-        db_table = 'images'
+        db_table = 'product_images'
 
 
 class Selection(models.Model) :
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
     size    = models.IntegerField()
-    price   = models.DecimalField(max_digits = 10, decimal_places = 3)
+    price   = models.DecimalField(max_digits = 11, decimal_places = 3)
 
     class Meta :
         db_table = 'selections'
