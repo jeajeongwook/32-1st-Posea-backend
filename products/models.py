@@ -49,7 +49,7 @@ class Skin(models.Model) :
 
 class ProductScent(models.Model) : 
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
-    Scent   = models.ForeignKey('Scent', on_delete=models.CASCADE)
+    scent   = models.ForeignKey('Scent', on_delete=models.CASCADE)
 
     class Meta :
         db_table = 'product_scents'
