@@ -12,7 +12,7 @@ class Main(models.Model) :
 
 class Category(models.Model) :
     name              = models.CharField(max_length=100)
-    main_id  = models.ForeignKey('Main', on_delete=models.CASCADE)
+    main_id           = models.ForeignKey('Main', on_delete=models.CASCADE)
 
     class Meta :
         db_table = 'categories'
