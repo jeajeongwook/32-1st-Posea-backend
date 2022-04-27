@@ -2,7 +2,6 @@ from django.db import models
 
 from cores.models import TimeStamp
 
-# Create your models here.
 class Main(models.Model) :
     name              = models.CharField(max_length=50)
 
@@ -12,14 +11,14 @@ class Main(models.Model) :
 
 class Category(models.Model) :
     name              = models.CharField(max_length=100)
-    main_id           = models.ForeignKey('Main', on_delete=models.CASCADE)
+    main              = models.ForeignKey('Main', on_delete=models.CASCADE)
 
     class Meta :
         db_table = 'categories'
 
 
 class Product(TimeStamp) :
-    category_id       = models.ForeignKey('Category', on_delete=models.CASCADE)
+    category          = models.ForeignKey('Category', on_delete=models.CASCADE)
     name              = models.CharField(max_length=100)
     usage             = models.CharField(max_length=100)
     texture           = models.CharField(max_length=100)
@@ -33,12 +32,12 @@ class Product(TimeStamp) :
         db_table = 'products'
 
 
-class Product_Skin(models.Model) : 
+class ProductSkin(models.Model) : 
     product           = models.ForeignKey('Product', on_delete=models.CASCADE)
     skin              = models.ForeignKey('Skin', on_delete=models.CASCADE)
 
     class Meta :
-        db_table = 'product_skins'
+        db_table = 'productskins'
 
 
 class Skin(models.Model) :
@@ -48,12 +47,12 @@ class Skin(models.Model) :
         db_table = 'skins'
 
 
-class Product_Scent(models.Model) : 
+class ProductScent(models.Model) : 
     product           = models.ForeignKey('Product', on_delete=models.CASCADE)
     scent             = models.ForeignKey('Scent', on_delete=models.CASCADE)
 
     class Meta :
-        db_table = 'product_scents'
+        db_table = 'productscents'
 
 
 class Scent(models.Model) :
@@ -74,7 +73,7 @@ class Image(models.Model) :
 class Selection(models.Model) :
     product_id        = models.ForeignKey('Product', on_delete=models.CASCADE)
     size              = models.IntegerField()
-    price             = models.IntegerField()
+    price             = models.DecimalField(max_digits = 7, decimal_places = 2)
 
     class Meta :
         db_table = 'selections'
