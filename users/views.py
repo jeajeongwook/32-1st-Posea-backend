@@ -5,7 +5,7 @@ from django.http            import JsonResponse
 from django.views           import View
 from users.models           import User
 from django.core.exceptions import ValidationError
-from cores.validation       import email_validate, password_validate
+from cores.validation       import validate_email, validate_password
 from posea.settings         import SECRET_KEY, ALGORITHM
 
 class CheckView(View):
@@ -20,7 +20,7 @@ class CheckView(View):
             data  = json.loads(request.body)
             email = data['email']
 
-            email_validate(email)
+            validate_email(email)
 
             if User.objects.filter(email=email).exists():
                 return JsonResponse({'message' : "LOGIN"}, status=200)
@@ -37,8 +37,8 @@ class SignUpView(View):
     def post(self, request):
         # 1. request에서 body를 가져온다.
         # 2. body에서 원하는 데이터를 꺼낸다.
-        # 3. password를 암호화 작업 진행한다.
-        # 4. email과 password에 대해 유효성 검사 진행
+        # 3. email과 password에 대해 유효성 검사 진행
+        # 4. password를 암호화 작업 진행한다.
         # 5. create로 데이터를 생성해서 db에 추가한다.
         try:
             data            = json.loads(request.body)
@@ -47,8 +47,8 @@ class SignUpView(View):
             email    = data['email']
             password = data['password']
 
-            email_validate(email)
-            password_validate(password)
+            validate_email(email)
+            validate_password(password)
 
             User.objects.create(
                 email      = data['email'],

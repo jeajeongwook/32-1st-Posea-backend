@@ -11,7 +11,7 @@ class MainCategory(models.Model) :
 
 class Category(models.Model) :
     name             = models.CharField(max_length=100)
-    maincategory     = models.ForeignKey('MainCategory', on_delete=models.CASCADE)
+    main_category    = models.ForeignKey('MainCategory', on_delete=models.CASCADE)
     main_description = models.CharField(max_length=1000, null=True)
     sub_description  = models.CharField(max_length=1000, null=True)
 
@@ -23,7 +23,7 @@ class Product(TimeStamp) :
     category  = models.ForeignKey('Category', on_delete=models.CASCADE)
     name      = models.CharField(max_length=100)
     usage     = models.CharField(max_length=100)
-    texture    = models.CharField(max_length=100)
+    texture   = models.CharField(max_length=100)
     direction = models.CharField(max_length=100)
     detail    = models.CharField(max_length=1000)
     sense     = models.CharField(max_length=100, null=True)
@@ -66,7 +66,7 @@ class Scent(models.Model) :
 
 
 class ProductImage(models.Model) :
-    product   = models.ForeignKey('Product', on_delete=models.CASCADE)
+    product           = models.ForeignKey('Product', on_delete=models.CASCADE)
     product_image_url = models.CharField(max_length=500)
     texture_image_url = models.CharField(max_length=500, null = True)
 
