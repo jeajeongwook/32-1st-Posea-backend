@@ -10,8 +10,10 @@ class MainCategory(models.Model) :
 
 
 class Category(models.Model) :
-    name         = models.CharField(max_length=100)
-    maincategory = models.ForeignKey('MainCategory', on_delete=models.CASCADE)
+    name             = models.CharField(max_length=100)
+    maincategory     = models.ForeignKey('MainCategory', on_delete=models.CASCADE)
+    main_description = models.CharField(max_length=1000, null=True)
+    sub_description  = models.CharField(max_length=1000, null=True)
 
     class Meta :
         db_table = 'categories'
@@ -65,7 +67,8 @@ class Scent(models.Model) :
 
 class ProductImage(models.Model) :
     product   = models.ForeignKey('Product', on_delete=models.CASCADE)
-    image_url = models.CharField(max_length=500)
+    product_image_url = models.CharField(max_length=500)
+    texture_image_url = models.CharField(max_length=500, null = True)
 
     class Meta :
         db_table = 'product_images'
@@ -83,7 +86,7 @@ class Selection(models.Model) :
 class Ingredient(models.Model) :
     product     = models.ForeignKey('Product', on_delete=models.CASCADE)
     name        = models.CharField(max_length=50)
-    detail_text = models.CharField(max_length=500)
+    detail_text = models.CharField(max_length=500, null = True)
 
     class Meta :
         db_table = 'ingredients'
