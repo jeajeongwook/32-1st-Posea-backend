@@ -41,14 +41,15 @@ class SignUpView(View):
         # 4. password를 암호화 작업 진행한다.
         # 5. create로 데이터를 생성해서 db에 추가한다.
         try:
-            data            = json.loads(request.body)
-            hashed_password = bcrypt.hashpw(data['password'].encode('UTF-8'), bcrypt.gensalt()).decode('utf-8')
-
+            data     = json.loads(request.body)
+            
             email    = data['email']
             password = data['password']
 
             validate_email(email)
             validate_password(password)
+
+            hashed_password = bcrypt.hashpw(data['password'].encode('UTF-8'), bcrypt.gensalt()).decode('utf-8')
 
             User.objects.create(
                 email      = data['email'],
