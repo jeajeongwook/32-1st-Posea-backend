@@ -38,24 +38,12 @@ class ProductlistView(View):
         try:
             main_category_id = request.GET.get('main_category_id', None)
             category_id      = request.GET.get('category_id', None)
-            name             = request.GET.get('search', None)
-
-            if name:
-                products = Product.objects.filter(name__icontains=name)
 
             if main_category_id:
                 categories = Category.objects.filter(main_category__id=main_category_id)
-                products = Product.objects.filter(category__main_category__id=main_category_id)
 
             if category_id:
-                products = Product.objects.filter(category_id=category_id)            
                 categories = Category.objects.filter(id=category_id)
-            
-            # categories = {}
-            #     if product.category.name in categories:
-            #         categories.append(product.category.name)
-            #     else:
-            #         
                 
             product_list = [{
                     
@@ -69,7 +57,7 @@ class ProductlistView(View):
                         'product_price'  : [selection.price for selection in product.selection_set.all()],
                         'product_size'   : [selection.size for selection in product.selection_set.all()],
                         'product_images' : product.productimage_set.get().product_image_url
-                        }for product in products]
+                        }for product in category.product_set.all()]
                 }for category in categories]
             return JsonResponse({'result' : product_list}, status = 200)
         except KeyError:
