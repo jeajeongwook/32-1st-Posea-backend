@@ -63,12 +63,12 @@ class ProductlistView(View):
                     'category_description'    : category.main_description,
                     'category_subdescription' : category.sub_description,
                     'product' :[{
-                        'id'                      : product.id,
-                        'category_id'             : product.category.id,
-                        'product_name'            : product.name,
-                        'product_price'           : [selection.price for selection in product.selection_set.all()],
-                        'product_size'            : [selection.size for selection in product.selection_set.all()],
-                        'product_images'          : product.productimage_set.get().product_image_url
+                        'id'             : product.id,
+                        'category_id'    : product.category.id,
+                        'product_name'   : product.name,
+                        'product_price'  : [selection.price for selection in product.selection_set.all()],
+                        'product_size'   : [selection.size for selection in product.selection_set.all()],
+                        'product_images' : product.productimage_set.get().product_image_url
                         }for product in products]
                 }for category in categories]
             return JsonResponse({'result' : product_list}, status = 200)
@@ -99,7 +99,7 @@ class ProductDetailView(View):
                     'usage'             : product.usage,
                     'category_name'     : product.category.name,
                     'price'             : [selection.price for selection in product.selection_set.all()],
-                    'size'                          : [selection.size for selection in product.selection_set.all()],
+                    'size'              : [selection.size for selection in product.selection_set.all()],
                     'product_images'    : product.productimage_set.get().product_image_url,
                     'texture_images'    : product.productimage_set.get().texture_image_url,
                     'skintype'          : [skin.skin_type for skin in product.skins.all()],
