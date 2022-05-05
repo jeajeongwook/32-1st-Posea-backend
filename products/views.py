@@ -18,6 +18,7 @@ class MainView(View):
             } for product in products]
             
             return JsonResponse({'result' : recommend_list}, status = 200)
+            
         except KeyError:
             return JsonResponse({'message' : 'KEY_ERROR'} , status = 401)
         except Product.DoesNotExist:
@@ -52,7 +53,9 @@ class ProductlistView(View):
                     'product_images' : product.productimage_set.get().product_image_url
                 }for product in category.product_set.all()]
             }for category in categories]
+
             return JsonResponse({'result' : product_list}, status = 200)
+
         except KeyError:
             return JsonResponse({'message' : 'KEY_ERROR'} , status = 401)
         except Product.DoesNotExist:
