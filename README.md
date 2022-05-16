@@ -18,9 +18,9 @@
 - 백엔드 깃헙 주소 : https://github.com/wecode-bootcamp-korea/32-1st-Posea-frontend
 - 프론트엔드 깃헙 주소 : https://github.com/wecode-bootcamp-korea/32-1st-Posea-backend
 
-# 구현한 기능
+# 내가 구현한 기능
 1. 이메일 체크 기능
-2. 로그인 / 회원가입
+2. 로그인 / 회원가입 / 토큰
 3. 메인페이지
 4. 전체 상품 페이지
 5. 카테고리별 상품 페이지
