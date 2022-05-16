@@ -1,6 +1,3 @@
-# 32-1st-Posea-backend
-백승연, 제정욱
-
 # Posea 프로젝트
 - 시연영상 : https://www.youtube.com/watch?v=JjHxEmLcN5k
 - 이솝 홈페이지 클론코딩
